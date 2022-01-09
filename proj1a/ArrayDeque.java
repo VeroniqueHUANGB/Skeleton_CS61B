@@ -48,17 +48,19 @@ public class ArrayDeque<T>{
     public T removeFirst(){
         T res = items[0];
         if(((size - 1)/items.length) < 0.25){
-            resizeUp(items, (size-1)*2, 1, 0, items.length-1);
+            resizeUp(items, (size-1)*RFACTOR, 1, 0, size-1);
         }
         if (size == 0){
             return null;
         }
         else if (size == 1){
             items[0] = null;
+            size --;
             return res;
         }else{
             items[0] = null;
             System.arraycopy(items, 1, items, 0, items.length-1);
+            size --;
             return res;
         }
     }
@@ -72,6 +74,7 @@ public class ArrayDeque<T>{
         }
         else{
             items[size-1] = null;
+            size --;
             return res;
         }
 
